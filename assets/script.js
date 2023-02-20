@@ -24,8 +24,24 @@ function renderSearchHistory() {
 });
 }
 
+
 // Search for a city
+function searchCity(city) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      // Save search to history and update UI
+      if (!searchHistoryArray.includes(data.name)) {
+        searchHistoryArray.push(data.name);
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArray));
+        renderSearchHistory();
+      }
 // Save search to history and update UI
+
 // Render current weather
 // Render current weather
 // Fetch forecast data
