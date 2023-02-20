@@ -23,3 +23,11 @@ function renderSearchHistory() {
     searchHistory.appendChild(item);
 });
 }
+
+// Search for a city
+// Save search to history and update UI
+// Render current weather
+// Render current weather
+// Fetch forecast data
+// Render forecast
+// Handle form submission
