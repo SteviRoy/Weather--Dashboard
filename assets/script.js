@@ -56,6 +56,38 @@ currentWeather.innerHTML = `
 const lat = data.coord.lat;
 const lon = data.coord.lon;
 
-// Fetch forecast data
-// Render forecast
+ // Fetch forecast data
+ const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+ fetch(forecastUrl)
+   .then(response => response.json())
+   .then(data => {
+     console.log(data);
+
+     // Render forecast
+     forecast.innerHTML = '';
+     for (let i = 0; i < data.list.length; i += 8) {
+       const item = data.list[i];
+       const date = new Date(item.dt_txt).toLocaleDateString();
+       const icon = item.weather[0].icon;
+       const temp = item.main.temp;
+       const humidity = item.main.humidity;
+       const wind = item.wind.speed;
+
+       forecast.innerHTML += `
+         <div class="forecast-item">
+           <h3>${date}</h3>
+           <img src="https://openweathermap.org/img/w/${icon}.png" alt="${item.weather[0].description}">
+           <p>Temperature: ${temp} °C</p>
+           <p>Humidity: ${humidity} %</p>
+           <p>Wind Speed: ${wind} m/s</p>
+         </div>
+       `;
+     }
+   })
+   .catch(error => console.error(error));
+})
+.catch(error => console.error(error));
+}
+
 // Handle form submission
