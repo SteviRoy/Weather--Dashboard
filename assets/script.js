@@ -91,3 +91,11 @@ const lon = data.coord.lon;
 }
 
 // Handle form submission
+searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const city = searchInput.value.trim();
+  if (city) {
+  searchCity(city);
+  searchInput.value = '';
+  }
+  });
