@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-color: #a73f3f;
+  background-image: linear-gradient(to left bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
   margin: 0;
 }
 
@@ -12,6 +12,8 @@ body {
 
 h1 {
   text-align: center;
+  font-size: xx-large;
+  margin-bottom: 15px;
 }
 
 form {
@@ -30,7 +32,7 @@ form {
 #search-btn {
   padding: 10px;
   background-color: #007bff;
-  color: #b69025;
+  color: #fff;
   border: none;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
@@ -48,7 +50,7 @@ form {
 
 .search-history-item {
   padding: 5px 10px;
-  background-color: #2aa041;
+  background-color: #e9ecef;
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -56,11 +58,16 @@ form {
 }
 
 .search-history-item:hover {
-  background-color: #3d7fc1;
+  background-color: #dee2e6;
 }
 
 .current-weather-item {
-  margin-bottom: 20px;
+  flex-basis: calc(20% - 10px);
+  padding: 10px;
+  background-color: #ff980069;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 .current-weather-item h2 {
@@ -75,7 +82,7 @@ form {
 .forecast-item {
   flex-basis: calc(20% - 10px);
   padding: 10px;
-  background-color: #aa1d99;
+  background-color: #e9ecef45;
   margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 5px;

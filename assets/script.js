@@ -24,6 +24,7 @@ function renderSearchHistory() {
 });
 }
 
+renderSearchHistory();
 
 // Search for a city
 function searchCity(city) {
@@ -41,53 +42,53 @@ function searchCity(city) {
         renderSearchHistory();
       }
 
-// Render current weather
-currentWeather.innerHTML = `
-<div class="current-weather-item">
-  <h2>${data.name} (${new Date().toLocaleDateString()})</h2>
-  <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
-  <p>Temperature: ${data.main.temp} °C</p>
-  <p>Humidity: ${data.main.humidity} %</p>
-  <p>Wind Speed: ${data.wind.speed} m/s</p>
-</div>
-`;
+      // Render current weather
+      currentWeather.innerHTML = `
+        <div class="current-weather-item">
+          <h2>${data.name} (${new Date().toLocaleDateString()})</h2>
+          <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
+          <p>Temperature: ${data.main.temp} °C</p>
+          <p>Humidity: ${data.main.humidity} %</p>
+          <p>Wind Speed: ${data.wind.speed} m/s</p>
+        </div>
+      `;
 
-// Get coordinates for forecast
-const lat = data.coord.lat;
-const lon = data.coord.lon;
+      // Get coordinates for forecast
+      const lat = data.coord.lat;
+      const lon = data.coord.lon;
 
- // Fetch forecast data
- const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+      // Fetch forecast data
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
- fetch(forecastUrl)
-   .then(response => response.json())
-   .then(data => {
-     console.log(data);
+      fetch(forecastUrl)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
 
-     // Render forecast
-     forecast.innerHTML = '';
-     for (let i = 0; i < data.list.length; i += 8) {
-       const item = data.list[i];
-       const date = new Date(item.dt_txt).toLocaleDateString();
-       const icon = item.weather[0].icon;
-       const temp = item.main.temp;
-       const humidity = item.main.humidity;
-       const wind = item.wind.speed;
+          // Render forecast
+          forecast.innerHTML = '';
+          for (let i = 0; i < data.list.length; i += 8) {
+            const item = data.list[i];
+            const date = new Date(item.dt_txt).toLocaleDateString();
+            const icon = item.weather[0].icon;
+            const temp = item.main.temp;
+            const humidity = item.main.humidity;
+            const wind = item.wind.speed;
 
-       forecast.innerHTML += `
-         <div class="forecast-item">
-           <h3>${date}</h3>
-           <img src="https://openweathermap.org/img/w/${icon}.png" alt="${item.weather[0].description}">
-           <p>Temperature: ${temp} °C</p>
-           <p>Humidity: ${humidity} %</p>
-           <p>Wind Speed: ${wind} m/s</p>
-         </div>
-       `;
-     }
-   })
-   .catch(error => console.error(error));
-})
-.catch(error => console.error(error));
+            forecast.innerHTML += `
+              <div class="forecast-item">
+                <h3>${date}</h3>
+                <img src="https://openweathermap.org/img/w/${icon}.png" alt="${item.weather[0].description}">
+                <p>Temperature: ${temp} °C</p>
+                <p>Humidity: ${humidity} %</p>
+                <p>Wind Speed: ${wind} m/s</p>
+              </div>
+            `;
+          }
+        })
+        .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error));
 }
 
 // Handle form submission
