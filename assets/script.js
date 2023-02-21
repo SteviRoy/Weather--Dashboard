@@ -40,10 +40,22 @@ function searchCity(city) {
         localStorage.setItem('searchHistory', JSON.stringify(searchHistoryArray));
         renderSearchHistory();
       }
-// Save search to history and update UI
 
 // Render current weather
-// Render current weather
+currentWeather.innerHTML = `
+<div class="current-weather-item">
+  <h2>${data.name} (${new Date().toLocaleDateString()})</h2>
+  <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="${data.weather[0].description}">
+  <p>Temperature: ${data.main.temp} °C</p>
+  <p>Humidity: ${data.main.humidity} %</p>
+  <p>Wind Speed: ${data.wind.speed} m/s</p>
+</div>
+`;
+
+// Get coordinates for forecast
+const lat = data.coord.lat;
+const lon = data.coord.lon;
+
 // Fetch forecast data
 // Render forecast
 // Handle form submission
